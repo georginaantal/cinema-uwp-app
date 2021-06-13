@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="KliensoldaliHazi.Views.ActorsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KliensoldaliHazi.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:KliensoldaliHazi.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:ActorPageViewModel x:Name="ActorPageBind"/>
+    </Page.DataContext>
+
+    <Grid Background="#161616">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Margin="50, 0, 0, 0">
+            <TextBox Background="#e4a999" Foreground="#161616" 
+                     PlaceholderText="Search for a(n) actor/actress" IsReadOnly="False" Text="{Binding Searched, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0, 20, 0, 20"
+                 TextAlignment="Left" FontWeight="Bold" FontFamily="Century Gothic" FontSize="15"
+                 Padding="13" TextWrapping="Wrap" Height="50" Width="450" BorderThickness="0"/>
+            <Button Click="SearchButton_Click" Background="#161616" Height="Auto" Width="Auto" Margin="5, 15, 0, 10" >
+                <StackPanel>
+                    <Image Source="/Assets/loupe.png" Height="45" Width="45"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <ListView Grid.Row="2" Grid.Column="0"  IsItemClickEnabled="True" ItemsSource="{Binding ActorData}"
+                  Background="#161616" FontWeight="Bold" FontFamily="Century Gothic" FontSize="15"
+                  HorizontalAlignment="Center" Height="370" Width="520" Margin="50, 20, 0, 20" VerticalAlignment="Top">
+            <ListView.Resources>
+                <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="#384e3e" />
+                <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="#384e3e" />
+            </ListView.Resources>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="#689775" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            
+            <ScrollViewer Height="370" VerticalAlignment="Top" Width="500">
+                <RichTextBlock  IsTextSelectionEnabled="True" TextWrapping="Wrap" 
+                        Width="400" Margin="20, 20, 20, 20" VerticalAlignment="Top">
+                    <Paragraph>
+                        <Run Foreground="#689775" FontWeight="Bold" FontSize="15" Text="{Binding Biography}" ></Run>
+                    </Paragraph>
+                </RichTextBlock>
+            </ScrollViewer>
+
+            <ListView ItemsSource="{Binding ActorMovieCredits}"
+                  Background="#161616" FontWeight="Bold" FontFamily="Century Gothic"
+                  HorizontalAlignment="Right" Height="370" Width="300" VerticalAlignment="Top" Margin="20, 0, 20, 20">
+                <ListView.Resources>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="#384e3e" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="#384e3e" />
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Foreground="#689775" FontSize="13"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        
+
+        
+
+    </Grid>
+</Page>
